@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>bai4</title>
+<style>
+    body {
+        font-family: Arial;
+        background-color: #f0f0f0;
+    }
+    .container {
+        width: 700px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border: 1px solid gray;
+    }
+    h3 {
+        border-bottom: 1px solid gray;
+        padding-bottom: 5px;
+    }
+    table {
+        width: 100%;
+    }
+    td {
+        padding: 6px;
+    }
+    .label {
+        width: 180px;
+        font-weight: bold;
+    }
+    .buttons {
+        text-align: right;
+        margin-top: 15px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+<form>
+
+<h3>Basic Info</h3>
+<table>
+<tr>
+    <td class="label">Employee ID</td>
+    <td><input type="text" value="9"></td>
+</tr>
+<tr>
+    <td class="label">Last Name</td>
+    <td><input type="text" value="Dodsworth"></td>
+</tr>
+<tr>
+    <td class="label">First Name</td>
+    <td><input type="text" value="Anne"></td>
+</tr>
+<tr>
+    <td class="label">Gender</td>
+    <td>
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+        <input type="radio" name="gender"> XXX
+        <input type="radio" name="gender" checked> ZZZ
+    </td>
+</tr>
+<tr>
+    <td class="label">Title</td>
+    <td><input type="text" value="Sales Representative"></td>
+</tr>
+<tr>
+    <td class="label">Suffix</td>
+    <td><input type="text" value="Ms."></td>
+</tr>
+<tr>
+    <td class="label">BirthDate</td>
+    <td><input type="text" value="1969-07-02"></td>
+</tr>
+<tr>
+    <td class="label">HireDate</td>
+    <td><input type="text" value="1994-11-15"></td>
+</tr>
+<tr>
+    <td class="label">SSN</td>
+    <td><input type="text"></td>
+</tr>
+<tr>
+    <td class="label">Reports To</td>
+    <td>
+        <select>
+            <option>Buchanan</option>
+            <option>Fuller</option>
+            <option>Leverling</option>
+        </select>
+    </td>
+</tr>
+</table>
+
+<h3>Contact Info</h3>
+<table>
+<tr>
+    <td class="label">Email</td>
+    <td><input type="email"></td>
+</tr>
+<tr>
+    <td class="label">Address</td>
+    <td><input type="text" value="7 Houndstooth Rd."></td>
+</tr>
+<tr>
+    <td class="label">City</td>
+    <td><input type="text" value="London"></td>
+</tr>
+<tr>
+    <td class="label">Postal Code</td>
+    <td><input type="text" value="WG2 7LT"></td>
+</tr>
+<tr>
+    <td class="label">Country</td>
+    <td>
+        <select>
+            <option>Russian Federation</option>
+            <option>USA</option>
+            <option>UK</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td class="label">Phone</td>
+    <td><input type="text" value="(234)234-2342"></td>
+</tr>
+</table>
+
+<h3>Optional Info</h3>
+<table>
+<tr>
+    <td class="label">Notes</td>
+    <td>
+        <textarea rows="4">
+Anne has a BA degree in English.
+Fluent in French and German.
+        </textarea>
+    </td>
+</tr>
+<tr>
+    <td class="label">Preferred Shift</td>
+    <td>
+        <input type="checkbox"> Regular
+        <input type="checkbox" checked> Grave Yard
+    </td>
+</tr>
+<tr>
+    <td class="label">Active?</td>
+    <td><input type="checkbox" checked></td>
+</tr>
+</table>
+
+<div class="buttons">
+    <button type="submit">Submit</button>
+    <button type="reset">Cancel</button>
+</div>
+
+</form>
+</div>
+
+</body>
+</html>
