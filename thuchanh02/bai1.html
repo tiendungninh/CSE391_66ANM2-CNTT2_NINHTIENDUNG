@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bai 1</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .form-wrapper {
+            background: #fff;
+            border: 2px solid #333;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .form-wrapper h2 {
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .row:nth-child(2) input {
+            flex: 1 1 100%;
+        }
+
+        textarea {
+            flex: 1 1 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        .bottom {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button {
+            background: #5dade2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #3498db;
+        }
+
+        .note {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="form-wrapper">
+        <h2>Get in touch with us by filling contact form below</h2>
+
+        <form class="contact-form">
+            <div class="row">
+                <input type="text" placeholder="* Enter your full name">
+                <input type="email" placeholder="* Enter your email address">
+            </div>
+
+            <div class="row">
+                <input type="text" placeholder="Enter your subject">
+            </div>
+
+            <div class="row">
+                <textarea placeholder="* Your message here..."></textarea>
+            </div>
+
+            <div class="row bottom">
+                <button type="submit">Send message</button>
+                <p class="note">* Please fill all required form field, thanks!</p>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
