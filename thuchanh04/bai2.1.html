@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Form đăng ký</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    width:250px;
+    padding:5px;
+}
+
+input[type="radio"],
+input[type="checkbox"]{
+    margin-right:5px;
+}
+
+button{
+    margin-top:10px;
+    padding:5px 10px;
+}
+
+#strengthBar{
+    height:8px;
+    width:250px;
+    background:#ccc;
+    margin-top:5px;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Form đăng ký</h2>
+
+<form>
+
+<label>Họ và tên</label>
+<input type="text" id="fullname" maxlength="50">
+<div id="nameCount">0/50</div>
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Số điện thoại</label>
+<input type="text" id="phone">
+
+<label>Mật khẩu</label>
+
+<div>
+<input type="password" id="password">
+<button type="button" id="togglePass">👁</button>
+</div>
+
+<div id="strengthBar"></div>
+<div id="strengthText"></div>
+
+<label>Xác nhận mật khẩu</label>
+<input type="password" id="confirmPassword">
+
+<label>Giới tính</label>
+
+<input type="radio" name="gender"> Nam
+<input type="radio" name="gender"> Nữ
+
+<br><br>
+
+<label>
+<input type="checkbox" id="terms"> Tôi đồng ý điều khoản
+</label>
+
+<br><br>
+
+<button type="submit">Đăng ký</button>
+
+</form>
+
+<script>
+
+const fullname = document.getElementById("fullname")
+const nameCount = document.getElementById("nameCount")
+
+fullname.addEventListener("input",function(){
+
+    nameCount.innerText = fullname.value.length + "/50"
+
+})
+
+const password = document.getElementById("password")
+const toggle = document.getElementById("togglePass")
+
+toggle.addEventListener("click",function(){
+
+    if(password.type === "password"){
+        password.type = "text"
+    }else{
+        password.type = "password"
+    }
+
+})
+
+const bar = document.getElementById("strengthBar")
+const text = document.getElementById("strengthText")
+
+password.addEventListener("input",function(){
+
+    let pass = password.value
+
+    let strength = 0
+
+    if(pass.length >= 6) strength++
+    if(/[A-Z]/.test(pass)) strength++
+    if(/[0-9]/.test(pass)) strength++
+
+    if(strength === 1){
+        bar.style.background = "red"
+        text.innerText = "Yếu"
+    }
+
+    else if(strength === 2){
+        bar.style.background = "orange"
+        text.innerText = "Trung bình"
+    }
+
+    else if(strength === 3){
+        bar.style.background = "green"
+        text.innerText = "Mạnh"
+    }
+
+    else{
+        bar.style.background = "#ccc"
+        text.innerText = ""
+    }
+
+})
+
+</script>
+
+</body>
+</html>

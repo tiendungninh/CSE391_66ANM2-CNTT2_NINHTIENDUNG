@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Bảng điểm sinh viên</title>
+
+<style>
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+input,select,button{
+    padding:6px;
+    margin-right:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+.low{
+    background:yellow;
+}
+
+th.sortable{
+    cursor:pointer;
+}
+
+#noResult{
+    text-align:center;
+    padding:10px;
+    font-style:italic;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Quản lý điểm sinh viên</h2>
+
+<input id="name" placeholder="Họ tên">
+<input id="score" placeholder="Điểm (0-10)">
+<button id="addBtn">Thêm</button>
+
+<br><br>
+
+<input id="search" placeholder="Tìm kiếm tên...">
+
+<select id="filterRank">
+<option value="all">Tất cả</option>
+<option value="Giỏi">Giỏi</option>
+<option value="Khá">Khá</option>
+<option value="Trung bình">Trung bình</option>
+<option value="Yếu">Yếu</option>
+</select>
+
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Họ tên</th>
+<th id="scoreHeader" class="sortable">Điểm</th>
+<th>Xếp loại</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+<div id="stats"></div>
+
+<script>
+
+let students = []
+let filteredStudents = []
+
+let sortAsc = true
+
+function getRank(score){
+    if(score >= 8.5) return "Giỏi"
+    if(score >= 7) return "Khá"
+    if(score >= 5) return "Trung bình"
+    return "Yếu"
+}
+
+function addStudent(){
+
+    let name = document.getElementById("name").value.trim()
+    let score = parseFloat(document.getElementById("score").value)
+
+    if(name === ""){
+        alert("Tên không được trống")
+        return
+    }
+
+    if(isNaN(score) || score < 0 || score > 10){
+        alert("Điểm phải từ 0-10")
+        return
+    }
+
+    students.push({name,score})
+
+    document.getElementById("name").value=""
+    document.getElementById("score").value=""
+    document.getElementById("name").focus()
+
+    applyFilters()
+}
+
+function applyFilters(){
+
+    let keyword = document.getElementById("search").value.toLowerCase()
+    let rankFilter = document.getElementById("filterRank").value
+
+    filteredStudents = students.filter(sv=>{
+
+        let matchName = sv.name.toLowerCase().includes(keyword)
+
+        let rank = getRank(sv.score)
+
+        let matchRank = rankFilter === "all" || rank === rankFilter
+
+        return matchName && matchRank
+
+    })
+
+    filteredStudents.sort((a,b)=>{
+
+        return sortAsc ? a.score - b.score : b.score - a.score
+
+    })
+
+    renderTable()
+}
+
+function renderTable(){
+
+    let tbody = document.getElementById("tbody")
+    tbody.innerHTML=""
+
+    if(filteredStudents.length === 0){
+        tbody.innerHTML = `<tr><td colspan="5" id="noResult">Không có kết quả</td></tr>`
+        return
+    }
+
+    let total = 0
+
+    filteredStudents.forEach((sv,index)=>{
+
+        total += sv.score
+
+        let tr = document.createElement("tr")
+
+        if(sv.score < 5){
+            tr.classList.add("low")
+        }
+
+        tr.innerHTML = `
+        <td>${index+1}</td>
+        <td>${sv.name}</td>
+        <td>${sv.score}</td>
+        <td>${getRank(sv.score)}</td>
+        <td><button data-name="${sv.name}">Xóa</button></td>
+        `
+
+        tbody.appendChild(tr)
+
+    })
+
+    let avg = (total/filteredStudents.length).toFixed(2)
+
+    document.getElementById("stats").innerText =
+    `Tổng SV hiển thị: ${filteredStudents.length} | Điểm TB: ${avg}`
+
+}
+
+document.getElementById("addBtn").addEventListener("click",addStudent)
+
+document.getElementById("score").addEventListener("keypress",e=>{
+    if(e.key==="Enter") addStudent()
+})
+
+document.getElementById("search").addEventListener("input",applyFilters)
+
+document.getElementById("filterRank").addEventListener("change",applyFilters)
+
+document.getElementById("scoreHeader").addEventListener("click",()=>{
+
+    sortAsc = !sortAsc
+
+    document.getElementById("scoreHeader").innerText =
+        sortAsc ? "Điểm ▲" : "Điểm ▼"
+
+    applyFilters()
+
+})
+
+document.getElementById("tbody").addEventListener("click",e=>{
+
+    if(e.target.tagName==="BUTTON"){
+
+        let name = e.target.dataset.name
+
+        students = students.filter(sv=>sv.name !== name)
+
+        applyFilters()
+
+    }
+
+})
+
+</script>
+
+</body>
+</html>
